@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>リンパ浮腫・アロマケアサロン Sirube（シルベ）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #faf7f4;
+      color: #2a2a2a;
+      font-weight: 300;
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+    :root {
+      --cream:     #faf7f4;
+      --cream-dark:#f2ede8;
+      --gold:      #c9a882;
+      --gold-dark: #a07850;
+      --text:      #2a2a2a;
+      --text-mid:  #6b6560;
+      --text-light:#afa9a3;
+      --dark:      #1e2a26;
+    }
+    .serif { font-family: 'Noto Serif JP', serif; }
+    .latin { font-family: 'Cormorant Garamond', serif; }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(250, 247, 244, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201,168,130,0.2);
+      transition: background 0.3s;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-style: italic;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+    }
+    .nav-logo span {
+      display: block;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 10px;
+      font-style: normal;
+      letter-spacing: 0.15em;
+      color: var(--text-mid);
+      margin-top: 2px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      color: var(--text-mid);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-dark); }
+    .nav-cta {
+      background: var(--gold) !important;
+      color: #fff !important;
+      padding: 10px 24px;
+      font-size: 12px !important;
+      letter-spacing: 0.15em !important;
+    }
+    .nav-cta:hover { background: var(--gold-dark) !important; }
+
+    /* ===== HERO SLIDER ===== */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      overflow: hidden;
+    }
+    .slides {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+    .slide.active { opacity: 1; }
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      transition: transform 7s ease;
+    }
+    .slide.active .slide-bg { transform: scale(1); }
+    .slide:nth-child(1) .slide-bg { background-image: url('images/hero1.jpg'); }
+    .slide:nth-child(2) .slide-bg { background-image: url('images/hero2.jpg'); }
+    .slide:nth-child(3) .slide-bg { background-image: url('images/hero3.jpg'); }
+    .slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,20,15,0.25) 0%, rgba(10,20,15,0.55) 100%);
+    }
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      padding: 0 24px;
+    }
+    .hero-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      margin-bottom: 24px;
+      display: block;
+    }
+    .hero-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(28px, 4vw, 50px);
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .hero-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 28px;
+    }
+    .hero-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.1em;
+      line-height: 2.2;
+      margin-bottom: 48px;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 16px 48px;
+      border: 1px solid rgba(255,255,255,0.7);
+      color: #fff;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-decoration: none;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .btn-primary:hover {
+      background: rgba(201,168,130,0.8);
+      border-color: var(--gold);
+    }
+    /* Slider dots */
+    .slider-dots {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .dot.active {
+      background: var(--gold);
+      transform: scale(1.4);
+    }
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      right: 48px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.5);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      writing-mode: vertical-rl;
+    }
+    .hero-scroll::after {
+      content: '';
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+      margin-top: 8px;
+    }
+
+    /* ===== SECTION BASE ===== */
+    section { padding: 100px 48px; }
+    .section-inner { max-width: 1080px; margin: 0 auto; }
+    .section-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(22px, 2.5vw, 32px);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .gold-line {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 32px;
+    }
+    .section-text {
+      color: var(--text-mid);
+      font-size: 15px;
+      line-height: 2.2;
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== CONCEPT ===== */
+    #concept { background: #fff; }
+    .concept-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .concept-image {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+    }
+    .concept-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    .concept-image:hover img { transform: scale(1.03); }
+
+    /* ===== FEATURES ===== */
+    #features { background: var(--cream); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-top: 64px;
+    }
+    .feature-card {
+      text-align: center;
+      padding: 48px 32px;
+      background: #fff;
+      border-top: 2px solid var(--gold);
+    }
+    .feature-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .feature-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 16px;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+    .feature-text {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 2;
+    }
+
+    /* ===== MENU ===== */
+    #menu { background: #fff; }
+    .menu-header { text-align: center; margin-bottom: 64px; }
+    .menu-header .gold-line { margin: 0 auto 32px; }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    .menu-card {
+      border: 1px solid var(--cream-dark);
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .menu-card:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+      transform: translateY(-4px);
+    }
+    .menu-card-img {
+      height: 220px;
+      overflow: hidden;
+    }
+    .menu-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .menu-card:hover .menu-card-img img { transform: scale(1.05); }
+    .menu-tag {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      padding: 3px 10px;
+      background: var(--gold);
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .menu-card-body { padding: 28px 32px; }
+    .menu-card-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .menu-card-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      color: var(--text-light);
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+    .menu-card-desc {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+    .menu-card-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-top: 1px solid var(--cream-dark);
+      padding-top: 16px;
+    }
+    .price-amount {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      color: var(--gold-dark);
+      letter-spacing: 0.05em;
+    }
+    .price-time {
+      font-size: 12px;
+      color: var(--text-light);
+      letter-spacing: 0.08em;
+    }
+
+    /* ===== THERAPIST ===== */
+    #therapist { background: var(--cream); }
+    .therapist-grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .therapist-image {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+    }
+    .therapist-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .therapist-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 26px;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      margin-bottom: 4px;
+    }
+    .therapist-name-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      color: var(--text-light);
+      letter-spacing: 0.2em;
+      margin-bottom: 32px;
+    }
+    .therapist-qualification {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 32px;
+    }
+    .qual-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-mid);
+    }
+    .qual-item::before {
+      content: '';
+      width: 6px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ===== CTA ===== */
+    #cta {
+      background: var(--dark);
+      padding: 100px 48px;
+      text-align: center;
+    }
+    #cta .section-label { color: var(--gold); }
+    #cta .section-title { color: #fff; margin: 0 auto 20px; max-width: 500px; }
+    #cta .gold-line { margin: 0 auto 24px; }
+    #cta .section-text { color: rgba(255,255,255,0.55); max-width: 480px; margin: 0 auto 48px; }
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-gold {
+      display: inline-block;
+      padding: 18px 56px;
+      background: var(--gold);
+      color: #fff;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .btn-gold:hover { background: var(--gold-dark); }
+    .btn-outline-white {
+      display: inline-block;
+      padding: 18px 56px;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.75);
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-decoration: none;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .btn-outline-white:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ===== ACCESS ===== */
+    #access { background: #fff; }
+    .access-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .access-map {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+    .access-map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .access-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+    .access-table tr { border-bottom: 1px solid var(--cream-dark); }
+    .access-table th {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--gold-dark);
+      padding: 16px 0;
+      width: 80px;
+      vertical-align: top;
+    }
+    .access-table td {
+      font-size: 14px;
+      color: var(--text-mid);
+      padding: 16px 0 16px 24px;
+      line-height: 1.8;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--dark);
+      padding: 60px 48px 40px;
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.08em;
+    }
+    .footer-logo span {
+      display: block;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 10px;
+      font-style: normal;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.35);
+      margin-top: 6px;
+    }
+    .footer-nav {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .footer-nav a {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: var(--gold); }
+    .footer-copy {
+      font-size: 11px;
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      letter-spacing: 0.1em;
+    }
+
+    /* ===== SCROLL ANIMATION ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      section { padding: 72px 24px; }
+      .concept-grid,
+      .therapist-grid,
+      .access-grid { grid-template-columns: 1fr; gap: 40px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; gap: 32px; }
+      .footer-nav { flex-wrap: wrap; gap: 16px; }
+      .hero-scroll { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo">
+    Sirube
+    <span>リンパ浮腫・アロマケアサロン</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#concept">コンセプト</a></li>
+    <li><a href="#menu">メニュー</a></li>
+    <li><a href="#therapist">セラピスト</a></li>
+    <li><a href="#access">アクセス</a></li>
+    <li><a href="#cta" class="nav-cta">ご予約</a></li>
+  </ul>
+</nav>
+
+<!-- HERO SLIDER -->
+<section id="hero">
+  <div class="slides">
+    <div class="slide active">
+      <div class="slide-bg"></div>
+      <div class="slide-overlay"></div>
+    </div>
+    <div class="slide">
+      <div class="slide-bg"></div>
+      <div class="slide-overlay"></div>
+    </div>
+    <div class="slide">
+      <div class="slide-bg"></div>
+      <div class="slide-overlay"></div>
+    </div>
+  </div>
+  <div class="hero-content">
+    <span class="hero-label">Lymphedema &amp; Aroma Care Salon</span>
+    <h1 class="hero-title serif">
+      からだの声に、<br>丁寧に寄り添う。
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">
+      リンパ浮腫専門のケアと、<br>
+      植物の香りが導く深いやすらぎ。
+    </p>
+    <a href="#concept" class="btn-primary serif">サロンについて</a>
+  </div>
+  <div class="slider-dots">
+    <div class="dot active" data-index="0"></div>
+    <div class="dot" data-index="1"></div>
+    <div class="dot" data-index="2"></div>
+  </div>
+  <div class="hero-scroll latin">SCROLL</div>
+</section>
+
+<!-- CONCEPT -->
+<section id="concept">
+  <div class="section-inner">
+    <div class="concept-grid">
+      <div class="concept-image fade-up">
+        <img src="images/concept.jpg" alt="カウンセリングの様子">
+      </div>
+      <div class="fade-up">
+        <span class="section-label">Concept</span>
+        <h2 class="section-title serif">
+          「しるべ」は、<br>道標という意味。
+        </h2>
+        <div class="gold-line"></div>
+        <p class="section-text">
+          リンパ浮腫や体のむくみに悩む方に、<br>
+          正しいケアへの道しるべになりたい——<br>
+          そんな想いから「Sirube（シルベ）」と名付けました。<br><br>
+          メディカルアロマとリンパドレナージュを組み合わせた<br>
+          専門的なアプローチで、あなたのからだに寄り添います。<br>
+          一人ひとりの状態を丁寧に確認しながら、<br>
+          安心して通い続けられるサロンを目指しています。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-inner">
+    <div style="text-align:center" class="fade-up">
+      <span class="section-label">Why Sirube</span>
+      <h2 class="section-title serif">Sirubeが選ばれる理由</h2>
+      <div class="gold-line" style="margin:0 auto;"></div>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-up">
+        <span class="feature-number latin">01</span>
+        <h3 class="feature-title serif">リンパ浮腫専門の知識</h3>
+        <p class="feature-text">
+          医療との連携も視野に入れた<br>
+          専門的なリンパドレナージュ技術。<br>
+          浮腫みの原因から丁寧にアプローチします。
+        </p>
+      </div>
+      <div class="feature-card fade-up">
+        <span class="feature-number latin">02</span>
+        <h3 class="feature-title serif">メディカルアロマの活用</h3>
+        <p class="feature-text">
+          NARD認定アロマテラピーの知識をもとに<br>
+          精油の持つ力を最大限に引き出す<br>
+          オーダーメイドのブレンドを使用。
+        </p>
+      </div>
+      <div class="feature-card fade-up">
+        <span class="feature-number latin">03</span>
+        <h3 class="feature-title serif">完全プライベートサロン</h3>
+        <p class="feature-text">
+          阪急宝塚線 池田駅から徒歩2分。<br>
+          完全予約制の1対1施術で、<br>
+          ゆったりとした時間をお過ごしください。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="section-inner">
+    <div class="menu-header fade-up">
+      <span class="section-label">Menu</span>
+      <h2 class="section-title serif">施術メニュー</h2>
+      <div class="gold-line"></div>
+      <p class="section-text" style="max-width:480px;margin:0 auto;">
+        あなたの体の状態に合わせて、最適なコースをご提案します。
+      </p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card fade-up">
+        <div class="menu-card-img">
+          <img src="images/menu1.jpg" alt="リンパドレナージュコース">
+        </div>
+        <div class="menu-card-body">
+          <span class="menu-tag">POPULAR</span>
+          <h3 class="menu-card-name serif">リンパドレナージュコース</h3>
+          <p class="menu-card-sub latin">Lymph Drainage Course</p>
+          <p class="menu-card-desc">
+            専門的なリンパドレナージュで、滞った流れを促進。
+            浮腫みが気になる方、リンパ浮腫ケアが必要な方に。
+          </p>
+          <div class="menu-card-price">
+            <span class="price-amount latin">¥12,000~</span>
+            <span class="price-time">60分〜</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card fade-up">
+        <div class="menu-card-img">
+          <img src="images/menu2.jpg" alt="アロマトリートメントコース">
+        </div>
+        <div class="menu-card-body">
+          <span class="menu-tag">RECOMMEND</span>
+          <h3 class="menu-card-name serif">アロマトリートメントコース</h3>
+          <p class="menu-card-sub latin">Aroma Treatment Course</p>
+          <p class="menu-card-desc">
+            厳選した精油を使ったオーダーメイドブレンドで
+            全身をトリートメント。心とからだの疲れを癒します。
+          </p>
+          <div class="menu-card-price">
+            <span class="price-amount latin">¥10,000~</span>
+            <span class="price-time">60分〜</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card fade-up">
+        <div class="menu-card-img">
+          <img src="images/menu3.jpg" alt="メディカルアロマケア">
+        </div>
+        <div class="menu-card-body">
+          <h3 class="menu-card-name serif">メディカルアロマケア</h3>
+          <p class="menu-card-sub latin">Medical Aroma Care</p>
+          <p class="menu-card-desc">
+            NARD認定の知識をもとに、症状に応じた精油を選定。
+            むくみ・冷え・免疫ケアなど目的別に対応します。
+          </p>
+          <div class="menu-card-price">
+            <span class="price-amount latin">¥8,000~</span>
+            <span class="price-time">45分〜</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card fade-up">
+        <div class="menu-card-img">
+          <img src="images/menu4.jpg" alt="初回体験コース">
+        </div>
+        <div class="menu-card-body">
+          <h3 class="menu-card-name serif">初回体験コース</h3>
+          <p class="menu-card-sub latin">First Experience Course</p>
+          <p class="menu-card-desc">
+            はじめての方向けの体験コース。
+            カウンセリングから施術まで丁寧にご案内します。
+            お気軽にお試しください。
+          </p>
+          <div class="menu-card-price">
+            <span class="price-amount latin">¥5,500</span>
+            <span class="price-time">60分</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THERAPIST -->
+<section id="therapist">
+  <div class="section-inner">
+    <div class="therapist-grid">
+      <div class="therapist-image fade-up">
+        <img src="images/therapist.jpg" alt="セラピスト">
+      </div>
+      <div class="fade-up">
+        <span class="section-label">Therapist</span>
+        <div class="gold-line"></div>
+        <h2 class="therapist-name serif">サロンオーナー名</h2>
+        <p class="therapist-name-en latin">Salon Owner Name</p>
+        <p class="section-text">
+          リンパ浮腫と長年向き合ってきた経験から、
+          「正しい知識を持ったケアで、もっと多くの方を助けたい」
+          という想いでサロンを開きました。<br><br>
+          施術はもちろん、日常でのセルフケア方法も
+          丁寧にお伝えします。どうぞ安心してお越しください。
+        </p>
+        <div class="therapist-qualification">
+          <div class="qual-item">NARD JAPAN認定アロマテラピーアドバイザー</div>
+          <div class="qual-item">リンパドレナージュ認定資格</div>
+          <div class="qual-item">メディカルアロマ検定取得</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <span class="section-label">Reservation</span>
+  <h2 class="section-title serif">ご予約・お問い合わせ</h2>
+  <div class="gold-line" style="margin:0 auto 24px;"></div>
+  <p class="section-text">
+    完全予約制です。<br>
+    ご予約・ご相談はLINEまたはお問い合わせフォームより<br>
+    お気軽にどうぞ。
+  </p>
+  <div class="cta-buttons">
+    <a href="#" class="btn-gold serif">LINEで予約する</a>
+    <a href="#" class="btn-outline-white serif">お問い合わせフォーム</a>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section id="access">
+  <div class="section-inner">
+    <div class="access-grid">
+      <div class="fade-up">
+        <span class="section-label">Access</span>
+        <h2 class="section-title serif">アクセス</h2>
+        <div class="gold-line"></div>
+        <table class="access-table">
+          <tr>
+            <th>サロン名</th>
+            <td>リンパ浮腫・アロマケアサロン Sirube（シルベ）</td>
+          </tr>
+          <tr>
+            <th>住所</th>
+            <td>大阪府池田市<br>（詳細住所はご予約後にご案内します）</td>
+          </tr>
+          <tr>
+            <th>アクセス</th>
+            <td>阪急宝塚線 池田駅より徒歩2分</td>
+          </tr>
+          <tr>
+            <th>営業時間</th>
+            <td>完全予約制<br>（詳細はお問い合わせください）</td>
+          </tr>
+          <tr>
+            <th>定休日</th>
+            <td>不定休</td>
+          </tr>
+        </table>
+      </div>
+      <div class="access-map fade-up">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3274.5!2d135.4327!3d34.8205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000f6b2b2b2b2b3%3A0x1!2z6Zq-6IG35a6H5YmN6aeF!5e0!3m2!1sja!2sjp!4v1"
+          allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo latin">
+        Sirube
+        <span>リンパ浮腫・アロマケアサロン</span>
+      </div>
+    </div>
+    <ul class="footer-nav">
+      <li><a href="#concept">コンセプト</a></li>
+      <li><a href="#menu">メニュー</a></li>
+      <li><a href="#therapist">セラピスト</a></li>
+      <li><a href="#access">アクセス</a></li>
+      <li><a href="#cta">ご予約</a></li>
+    </ul>
+  </div>
+  <p class="footer-copy">© 2025 Sirube. All Rights Reserved.</p>
+</footer>
+
+<script>
+  // ===== HERO SLIDER =====
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.dot');
+  let current  = 0;
+  let timer;
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function autoPlay() {
+    timer = setInterval(() => goTo(current + 1), 5000);
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      clearInterval(timer);
+      goTo(+dot.dataset.index);
+      autoPlay();
+    });
+  });
+
+  autoPlay();
+
+  // ===== SCROLL FADE UP =====
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
