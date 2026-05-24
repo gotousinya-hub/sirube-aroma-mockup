@@ -351,6 +351,47 @@
     .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+    /* ===== NOTE BLOG ===== */
+    #note { background: var(--cream-dark); }
+    .note-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 32px;
+      margin-top: 48px;
+    }
+    .note-card {
+      background: var(--cream); border: 1px solid rgba(201,168,130,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none; color: inherit; display: block;
+    }
+    .note-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+    .note-card-img { aspect-ratio: 16/9; overflow: hidden; }
+    .note-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .note-card:hover .note-card-img img { transform: scale(1.04); }
+    .note-card-body { padding: 24px; }
+    .note-card-meta {
+      font-size: 11px; letter-spacing: 0.12em; color: var(--gold-dark);
+      font-family: 'Cormorant Garamond', serif; margin-bottom: 10px;
+    }
+    .note-card-title {
+      font-family: 'Noto Serif JP', serif; font-size: 15px;
+      line-height: 1.7; color: var(--text); margin-bottom: 12px; font-weight: 400;
+    }
+    .note-card-excerpt {
+      font-size: 13px; color: var(--text-mid); line-height: 1.85; margin-bottom: 18px;
+    }
+    .note-card-link {
+      font-family: 'Cormorant Garamond', serif; font-size: 13px;
+      color: var(--gold-dark); letter-spacing: 0.1em;
+    }
+    .note-card-link::after { content: ' →'; }
+    .btn-note {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--gold); color: var(--gold-dark);
+      padding: 13px 36px; font-family: 'Noto Serif JP', serif;
+      font-size: 13px; letter-spacing: 0.12em; text-decoration: none;
+      transition: all 0.25s; background: transparent; margin-top: 40px;
+    }
+    .btn-note:hover { background: var(--gold); color: #fff; }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
       nav { padding: 14px 20px; }
@@ -359,6 +400,7 @@
       .concept-grid, .therapist-grid, .access-grid { grid-template-columns: 1fr; gap: 40px; }
       .features-grid { grid-template-columns: 1fr; gap: 16px; }
       .insta-grid { grid-template-columns: repeat(3,1fr); }
+      .note-grid { grid-template-columns: 1fr; gap: 20px; }
       .hero-scroll { display: none; }
       .footer-inner { flex-direction: column; gap: 28px; }
       .footer-nav { flex-wrap: wrap; gap: 16px; }
@@ -377,6 +419,7 @@
     <li><a href="#concept">コンセプト</a></li>
     <li><a href="#menu">メニュー</a></li>
     <li><a href="#therapist">セラピスト</a></li>
+    <li><a href="#note">ブログ</a></li>
     <li><a href="#access">アクセス</a></li>
     <li>
       <a href="https://lin.ee/D3U6YxXn" target="_blank" class="nav-line">
@@ -668,6 +711,50 @@
   </div>
 </section>
 
+<!-- NOTE BLOG -->
+<section id="note">
+  <div class="section-inner">
+    <div class="fade-up" style="text-align:center">
+      <span class="section-label">Note</span>
+      <h2 class="section-title" style="font-family:'Noto Serif JP',serif;">最新のブログ記事</h2>
+      <div class="gold-line" style="margin:0 auto 20px;"></div>
+      <p class="section-text">リンパ浮腫・アロマ・セルフケアについて綴っています</p>
+    </div>
+    <div class="note-grid">
+      <a href="https://note.com/" target="_blank" class="note-card fade-up">
+        <div class="note-card-img"><img src="images/concept.jpg" alt="リンパ浮腫とは"></div>
+        <div class="note-card-body">
+          <div class="note-card-meta">2025.05.10</div>
+          <h3 class="note-card-title">リンパ浮腫とは？〜看護師セラピストが丁寧に解説〜</h3>
+          <p class="note-card-excerpt">「リンパ浮腫」という言葉を聞いたことはありますか？むくみとは少し違う、リンパ系のトラブルについてわかりやすくお伝えします。</p>
+          <span class="note-card-link">続きを読む</span>
+        </div>
+      </a>
+      <a href="https://note.com/" target="_blank" class="note-card fade-up">
+        <div class="note-card-img"><img src="images/menu3.jpg" alt="メディカルアロマ"></div>
+        <div class="note-card-body">
+          <div class="note-card-meta">2025.04.22</div>
+          <h3 class="note-card-title">メディカルアロマって何が違うの？一般のアロマとの違いを解説</h3>
+          <p class="note-card-excerpt">アロマテラピーはよく知られていますが、「メディカルアロマ」は少し異なります。精油の品質と使い方の違いをお伝えします。</p>
+          <span class="note-card-link">続きを読む</span>
+        </div>
+      </a>
+      <a href="https://note.com/" target="_blank" class="note-card fade-up">
+        <div class="note-card-img"><img src="images/menu2.jpg" alt="ドライヘッドスパ"></div>
+        <div class="note-card-body">
+          <div class="note-card-meta">2025.04.05</div>
+          <h3 class="note-card-title">ドライヘッドスパで得られる5つの効果〜頭皮から全身が整う〜</h3>
+          <p class="note-card-excerpt">水を使わずに行うドライヘッドスパ。頭皮のコリほぐし、眼精疲労、睡眠の質改善など、意外と知られていない効果をご紹介します。</p>
+          <span class="note-card-link">続きを読む</span>
+        </div>
+      </a>
+    </div>
+    <div style="text-align:center" class="fade-up">
+      <a href="https://note.com/" target="_blank" class="btn-note">noteで読む</a>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section id="cta">
   <span class="section-label">Reservation</span>
@@ -751,6 +838,7 @@
       <li><a href="#concept">コンセプト</a></li>
       <li><a href="#menu">メニュー</a></li>
       <li><a href="#therapist">セラピスト</a></li>
+      <li><a href="#note">ブログ</a></li>
       <li><a href="#access">アクセス</a></li>
     </ul>
     <div class="footer-sns">
