@@ -423,7 +423,7 @@
 
     /* ===== HAMBURGER MENU ===== */
     .hamburger {
-      display: none; flex-direction: column; justify-content: center;
+      display: flex; flex-direction: column; justify-content: center;
       gap: 5px; cursor: pointer; padding: 4px; background: none; border: none;
       z-index: 300;
     }
@@ -461,10 +461,12 @@
     }
 
     /* ===== RESPONSIVE ===== */
+    @media (min-width: 901px) {
+      .hamburger { display: none; }
+    }
     @media (max-width: 900px) {
       nav { padding: 14px 20px; }
       .nav-links { display: none; }
-      .hamburger { display: flex !important; }
       section { padding: 72px 20px; }
       .concept-grid, .therapist-grid, .access-grid { grid-template-columns: 1fr; gap: 40px; }
       .features-grid { grid-template-columns: 1fr; gap: 16px; }
