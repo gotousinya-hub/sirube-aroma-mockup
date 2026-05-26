@@ -314,6 +314,32 @@
     .access-table a { color: #3a7ca5; text-decoration: underline; text-underline-offset: 3px; }
     .access-table a:hover { color: #2a5f82; }
 
+    /* ===== PARTNER ===== */
+    #partner {
+      background: var(--cream-dark);
+      padding: 56px 48px;
+      text-align: center;
+    }
+    .partner-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px; letter-spacing: 0.35em; color: var(--text-light);
+      margin-bottom: 8px;
+    }
+    .partner-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px; color: var(--text-mid);
+      letter-spacing: 0.12em; margin-bottom: 28px;
+    }
+    .partner-banner {
+      display: inline-block;
+      transition: opacity 0.25s;
+    }
+    .partner-banner:hover { opacity: 0.85; }
+    .partner-banner img {
+      max-width: 480px; width: 90%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
     /* ===== FOOTER ===== */
     footer { background: var(--dark); padding: 60px 48px 40px; }
     .footer-inner {
@@ -832,6 +858,15 @@
       </div>
     </div>
   </div>
+</section>
+
+<!-- PARTNER BANNER -->
+<section id="partner">
+  <p class="partner-label">MEDICAL PARTNER</p>
+  <p class="partner-title">連携医療機関</p>
+  <a href="https://liff.line.me/2008233305-0GmkP6W8/line-friend-redirect?12=1" target="_blank" class="partner-banner fade-up">
+    <img src="images/partner-banner.jpg" alt="むくみ肥満オンラインセンター">
+  </a>
 </section>
 
 <!-- FOOTER -->
