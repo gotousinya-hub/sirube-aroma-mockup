@@ -423,17 +423,17 @@
 
     /* ===== HAMBURGER MENU ===== */
     .hamburger {
-      display: flex; flex-direction: column; justify-content: center;
+      flex-direction: column; justify-content: center;
       gap: 5px; cursor: pointer; padding: 4px; background: none; border: none;
       z-index: 300;
     }
     .hamburger span {
-      display: block; width: 24px; height: 1.5px;
-      background: var(--text); transition: all 0.3s ease;
+      display: block; width: 26px; height: 2px;
+      background: #2a2a2a; transition: all 0.3s ease;
     }
-    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     .mobile-nav {
       display: none; position: fixed; inset: 0; z-index: 250;
@@ -461,12 +461,9 @@
     }
 
     /* ===== RESPONSIVE ===== */
-    @media (min-width: 901px) {
-      .hamburger { display: none; }
-    }
     @media (max-width: 900px) {
       nav { padding: 14px 20px; }
-      .nav-links { display: none; }
+      .nav-links { display: none !important; }
       section { padding: 72px 20px; }
       .concept-grid, .therapist-grid, .access-grid { grid-template-columns: 1fr; gap: 40px; }
       .features-grid { grid-template-columns: 1fr; gap: 16px; }
@@ -499,7 +496,7 @@
     </li>
   </ul>
   <!-- ハンバーガーボタン（スマホのみ表示） -->
-  <button class="hamburger" id="hamburger" aria-label="メニュー">
+  <button class="hamburger" id="hamburger" aria-label="メニュー" style="display:none;">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -957,9 +954,26 @@
 </footer>
 
 <script>
-  // Hamburger Menu
+  // Hamburger Menu — JS制御でスマホ幅のみ表示
   const hamburger = document.getElementById('hamburger');
   const mobileNav = document.getElementById('mobileNav');
+  const navLinks  = document.querySelector('.nav-links');
+
+  function applyMobileNav() {
+    if (window.innerWidth <= 900) {
+      hamburger.style.display = 'flex';
+      if (navLinks) navLinks.style.display = 'none';
+    } else {
+      hamburger.style.display = 'none';
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+      if (navLinks) navLinks.style.display = '';
+    }
+  }
+  applyMobileNav();
+  window.addEventListener('resize', applyMobileNav);
+
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('open');
     mobileNav.classList.toggle('open');
